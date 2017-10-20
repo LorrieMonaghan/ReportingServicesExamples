@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report MustUnderstand="df" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:df="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition/defaultfontfamily">
+  <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DESKTOP">
+      <DataSourceReference>DESKTOP</DataSourceReference>
+      <rd:SecurityType>Integrated</rd:SecurityType>
+      <rd:DataSourceID>441c55c6-16c8-460f-9304-15a557107b55</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="pm_states">
+      <SharedDataSet>
+        <SharedDataSetReference>States</SharedDataSetReference>
+      </SharedDataSet>
+      <Fields>
+        <Field Name="StateProvinceID">
+          <DataField>StateProvinceID</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="StateProvinceName">
+          <DataField>StateProvinceName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="pm_cities">
+      <SharedDataSet>
+        <SharedDataSetReference>Cities</SharedDataSetReference>
+        <QueryParameters>
+          <QueryParameter Name="state">
+            <Value>=Parameters!state.Value</Value>
+            <rd:UserDefined>true</rd:UserDefined>
+          </QueryParameter>
+        </QueryParameters>
+      </SharedDataSet>
+      <Fields>
+        <Field Name="CityID">
+          <DataField>CityID</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="CityName">
+          <DataField>CityName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Textbox Name="State">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Parameters!state.Value</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>State</rd:DefaultName>
+            <Top>0.89641cm</Top>
+            <Left>1.84891cm</Left>
+            <Height>0.6cm</Height>
+            <Width>2.5cm</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+        </ReportItems>
+        <Height>2in</Height>
+        <Style />
+      </Body>
+      <Width>6.5in</Width>
+      <Page>
+        <PageHeight>29.7cm</PageHeight>
+        <PageWidth>21cm</PageWidth>
+        <LeftMargin>2cm</LeftMargin>
+        <RightMargin>2cm</RightMargin>
+        <TopMargin>2cm</TopMargin>
+        <BottomMargin>2cm</BottomMargin>
+        <ColumnSpacing>0.13cm</ColumnSpacing>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <ReportParameters>
+    <ReportParameter Name="state">
+      <DataType>Integer</DataType>
+      <Prompt>States</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>pm_states</DataSetName>
+          <ValueField>StateProvinceID</ValueField>
+          <LabelField>StateProvinceName</LabelField>
+        </DataSetReference>
+      </ValidValues>
+    </ReportParameter>
+    <ReportParameter Name="cities">
+      <DataType>Integer</DataType>
+      <DefaultValue>
+        <DataSetReference>
+          <DataSetName>pm_cities</DataSetName>
+          <ValueField>CityID</ValueField>
+        </DataSetReference>
+      </DefaultValue>
+      <Prompt>Cities</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>pm_cities</DataSetName>
+          <ValueField>CityID</ValueField>
+          <LabelField>CityName</LabelField>
+        </DataSetReference>
+      </ValidValues>
+      <MultiValue>true</MultiValue>
+      <UsedInQuery>True</UsedInQuery>
+    </ReportParameter>
+  </ReportParameters>
+  <ReportParametersLayout>
+    <GridLayoutDefinition>
+      <NumberOfColumns>4</NumberOfColumns>
+      <NumberOfRows>2</NumberOfRows>
+      <CellDefinitions>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>state</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>2</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>cities</ParameterName>
+        </CellDefinition>
+      </CellDefinitions>
+    </GridLayoutDefinition>
+  </ReportParametersLayout>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportID>36934848-be1e-4116-9c18-7ab4f731c11b</rd:ReportID>
+</Report>
